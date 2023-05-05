@@ -1,3 +1,16 @@
+class robot {
+
+  constructor() { //default constructor
+    this.xPos = width / 2;
+    this.yPos = height / 2;
+    this.bodyheadColor = color(200);
+    this.bikeColor = color(255);
+    this.robotSize = 1;
+  }
+}
+
+
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -24,10 +37,12 @@ function draw() {
   } else {
     scale(1.0);
   }
-  fill(66, 182, 75);
+  //bike
+  push();
+  noFill();
+  stroke(255);
   ellipse(-40, 0, 50, 50); //achterwiel
   ellipse(50, 0, 50, 50); //voorwiel
-  fill(200);
   line(-40, 0, 0, 0); //verbinding achterwiel met crank
   line(-40, 0, -10, -40); //achtervork
   line(0, 0, -10, -40); //verbinding crank met zadelpen
@@ -41,12 +56,18 @@ function draw() {
   line(-25, -50, -5, -50); //zadel
   line(0, 0, 10, 13); //crankas
   line(5, 13, 15, 13); //pedaal
+  pop();
+
+  //body
+  fill(200);
   rect(-20, -50, 10, -50); //body
-  rect(-50, -100, 70, -70); //head
   line(-20, -100, 20, -50); //linkerarm
   line(-10, -100, 40, -50); //rechterarm
   ellipse(20, -50, 5, 5); //linkerhand
   ellipse(40, -50, 5, 5); //rechterhand
+
+  //head
+  rect(-50, -100, 70, -70); //head
   rect(-60, -150, 10, 35); //linkeroor
   rect(20, -150, 10, 35); //rechteroor
   ellipse(-30, -145, 15, 15);//linkeroog
