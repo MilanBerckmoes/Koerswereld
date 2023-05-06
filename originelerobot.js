@@ -25,7 +25,7 @@ function draw() {
     rect(0, 30, windowWidth, 10);
 
     strokeWeight(2);
-    translate(x, y);  // Move all to (mouseX, y)
+    translate(x, y);  // Move all to (mouseX, mouseY)
     if (mouseIsPressed) {
         scale(2.0); //2 keer zo groot als muis ingedrukt is
     } else {
