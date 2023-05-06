@@ -1,3 +1,10 @@
+let x = 400; //x-coordinaat
+let y = 400; //y-coordinaat
+let bodyHeight = 50; //bodyHeight
+
+
+
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
@@ -18,13 +25,14 @@ function draw() {
     rect(0, 30, windowWidth, 10);
 
     strokeWeight(2);
-    translate(mouseX, mouseY);  // Move all to (mouseX, y)
+    translate(x, y);  // Move all to (mouseX, y)
     if (mouseIsPressed) {
         scale(2.0); //2 keer zo groot als muis ingedrukt is
     } else {
         scale(1.0);
     }
     fill(66, 182, 75);
+
     //bike
     ellipse(-40, 0, 50, 50); //achterwiel
     ellipse(50, 0, 50, 50); //voorwiel
@@ -44,26 +52,26 @@ function draw() {
     line(5, 13, 15, 13); //pedaal
 
     //body
-    rect(-20, -50, 10, -50); //body
-    line(-20, -100, 20, -50); //linkerarm
-    line(-10, -100, 40, -50); //rechterarm
+    rect(-20, -50, 10, -bodyHeight); //body
+    line(-20, -bodyHeight - 50, 20, -50); //linkerarm
+    line(-10, -bodyHeight - 50, 40, -50); //rechterarm
     ellipse(20, -50, 5, 5); //linkerhand
     ellipse(40, -50, 5, 5); //rechterhand
 
     //head
-    rect(-50, -100, 70, -70); //head
-    rect(-60, -150, 10, 35); //linkeroor
-    rect(20, -150, 10, 35); //rechteroor
-    ellipse(-30, -145, 15, 15);//linkeroog
-    ellipse(0, -145, 15, 15); //rechteroog
+    rect(-50, -bodyHeight - 50, 70, -70); //head
+    rect(-60, -bodyHeight - 100, 10, 35); //linkeroor
+    rect(20, -bodyHeight - 100, 10, 35); //rechteroor
+    ellipse(-30, -bodyHeight - 95, 15, 15);//linkeroog
+    ellipse(0, -bodyHeight - 95, 15, 15); //rechteroog
     fill(0); //pupillen in zwart
-    ellipse(-30, -144, 5, 7); //linkerpupil
-    ellipse(0, -144, 5, 7); //rechterpupil
+    ellipse(-30, -bodyHeight - 94, 5, 7); //linkerpupil
+    ellipse(0, -bodyHeight - 94, 5, 7); //rechterpupil
     fill(200); //mond en tanden grijs
-    rect(-30, -120, 30, 10); //mond
-    line(-25, -120, -25, -110);//tanden
-    line(-20, -120, -20, -110);//tanden
-    line(-15, -120, -15, -110);//tanden
-    line(-10, -120, -10, -110);//tanden
-    line(-5, -120, -5, -110);//tanden
+    rect(-30, -bodyHeight - 70, 30, 10); //mond
+    line(-25, -bodyHeight - 70, -25, -bodyHeight - 60);//tanden
+    line(-20, -bodyHeight - 70, -20, -bodyHeight - 60);//tanden
+    line(-15, -bodyHeight - 70, -15, -bodyHeight - 60);//tanden
+    line(-10, -bodyHeight - 70, -10, -bodyHeight - 60);//tanden
+    line(-5, -bodyHeight - 70, -5, -bodyHeight - 60);//tanden
 }
