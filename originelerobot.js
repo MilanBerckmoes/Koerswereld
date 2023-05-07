@@ -21,7 +21,7 @@ let timeDelayTrigger = false;
 
 function preload() {
 
-    backgroundImage = loadImage('data/cobbles.jpg');
+    backgroundImg = loadImage('data/cobbles.jpg');
 }
 
 
@@ -32,7 +32,7 @@ function setup() {
 }
 
 function draw() {
-    image(backgroundImage, 0, 0, width, height);
+    image(backgroundImg, 0, 0, width, height);
 
     fill(22, 122, 191); //blauw
     rect(0, 0, windowWidth, 10);
