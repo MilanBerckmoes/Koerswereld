@@ -1,7 +1,28 @@
+class robot {
+
+    constructor() { //default constructor
+        this.xPos = width / 2;
+        this.yPos = height / 2;
+        this.bodyheadColor = color(200);
+        this.bikeColor1 = color(255);
+        this.bikeColor2 = color(0);
+        this.robotSize = 1;
+    }
+}
+
+
 let x = 400; //x-coordinaat
 let y = 400; //y-coordinaat
 let bodyHeight = 50; //bodyHeight
+let backgroundImg;
+let timeDelay = 500;
+let timer = 0;
+let timeDelayTrigger = false;
 
+function preload() {
+
+    backgroundImage = loadImage('data/cobbles.jpg');
+}
 
 
 
@@ -11,7 +32,8 @@ function setup() {
 }
 
 function draw() {
-    background(66, 182, 75); //groen
+    image(backgroundImage, 0, 0, width, height);
+
     fill(22, 122, 191); //blauw
     rect(0, 0, windowWidth, 10);
 
@@ -24,19 +46,32 @@ function draw() {
     fill(246, 224, 54); //geel
     rect(0, 30, windowWidth, 10);
 
+    fill(66, 182, 75); //groen
+    rect(0, 40, windowWidth, 10);
+
     strokeWeight(2);
-    translate(x, y);  // Move all to (mouseX, mouseY)
+    translate(mouseX, mouseY);  // Move all to (mouseX, y)
     if (mouseIsPressed) {
         scale(2.0); //2 keer zo groot als muis ingedrukt is
     } else {
         scale(1.0);
     }
-    fill(66, 182, 75);
 
     //bike
+    push();
+    if (millis() - timer > timeDelay) {
+        timeDelayTrigger = !timeDelayTrigger; //change the trigger after each delay
+        timer = millis();
+    }
+    if (timeDelayTrigger) {
+        stroke(255);
+    }
+    else {
+        stroke(0);
+    }
+    noFill();
     ellipse(-40, 0, 50, 50); //achterwiel
     ellipse(50, 0, 50, 50); //voorwiel
-    fill(200);
     line(-40, 0, 0, 0); //verbinding achterwiel met crank
     line(-40, 0, -10, -40); //achtervork
     line(0, 0, -10, -40); //verbinding crank met zadelpen
@@ -50,8 +85,10 @@ function draw() {
     line(-25, -50, -5, -50); //zadel
     line(0, 0, 10, 13); //crankas
     line(5, 13, 15, 13); //pedaal
+    pop();
 
     //body
+    fill(200);
     rect(-20, -50, 10, -bodyHeight); //body
     line(-20, -bodyHeight - 50, 20, -50); //linkerarm
     line(-10, -bodyHeight - 50, 40, -50); //rechterarm
