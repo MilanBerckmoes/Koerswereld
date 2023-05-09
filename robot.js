@@ -14,6 +14,7 @@ class robot {
 
 
   display() {
+    push();
     let x = 400; //x-coordinaat
     let y = 400; //y-coordinaat
     let bodyHeight = 50; //bodyHeight
@@ -95,6 +96,7 @@ class robot {
     line(-15, -bodyHeight - 70, -15, -bodyHeight - 60);//tanden
     line(-10, -bodyHeight - 70, -10, -bodyHeight - 60);//tanden
     line(-5, -bodyHeight - 70, -5, -bodyHeight - 60);//tanden
+    pop();
   }
 
   move() {

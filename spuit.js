@@ -39,6 +39,10 @@ class spuit {
         pop();
     }
 
+    update() {
+        this.yPos += this.speedS
+    }
+
     move() { //de spuit laten vallen vanuit de lucht
         this.yPosS += this.speedS;
     }

@@ -29,6 +29,10 @@ class bidon {
 
     }
 
+    update() {
+        this.yPos += this.speedB
+    }
+
     move() {
         this.yPosB += this.speedB;
     }

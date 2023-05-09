@@ -28,36 +28,37 @@ function draw() {
 
     //teken bidons
     for (let i = bidons.length - 1; i >= 0; i--) {
-        let bidons = bidons[i];
-        bidons.update();
-        bidons.display();
+        let bidon = bidons[i];
+        bidon.update();
+        bidon.display();
 
         // kijken of bidon gepakt is
-        if (myRobot.isGepakt(bidons)) {
+        if (myRobot.isGepakt(bidon)) {
+            score++;
             bidons.splice(i, 1);
         }
 
         // kijken of bidon gemist is
-        if (bidons.y > height) {
+        if (bidon.yPos > height) {
             bidons.splice(i, 1);
         }
     }
 
     //teken spuiten
     for (let i = spuiten.length - 1; i >= 0; i--) {
-        let spuiten = spuiten[i];
-        spuiten.update();
-        spuiten.display();
+        let spuit = spuiten[i];
+        spuit.update();
+        spuit.display();
 
 
         //kijken of spuit gepakt is
-        if (myRobot.isGepakt(spuiten)) {
+        if (myRobot.isGepakt(spuit)) {
             score--;
             spuiten.splice(i, 1);
         }
 
         //kijken of spuit gemist is
-        if (spuiten.y > height) {
+        if (spuit.yPos > height) {
             spuiten.splice(i, 1);
         }
     }
@@ -65,10 +66,10 @@ function draw() {
     // Voeg nieuwe bidon of spuit toe elke seconde
     if (frameCount % 60 == 0) {
         if (random(1) < 0.5) {
-            bidons.push(new bidons(random(width), 0, random(3, 5)));
+            bidons.push(new bidon(random(width), 0, random(3, 7), color(200), 0.5));
         }
         else {
-            spuiten.push(new spuiten(random(width), 0, random(3, 5)));
+            spuiten.push(new spuit(random(width), 0, random(3, 7), color(200), 0.5));
         }
 
     }
