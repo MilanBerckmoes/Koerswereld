@@ -40,7 +40,7 @@ class spuit {
     }
 
     update() {
-        this.yPosB += this.speedB;
+        this.yPosS += this.speedS;
     }
 
     isGepakt(robotX, robotY, robotW, robotH) {
