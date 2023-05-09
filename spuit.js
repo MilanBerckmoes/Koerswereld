@@ -43,7 +43,7 @@ class spuit {
         this.yPosS += this.speedS;
     }
 
-    isGepakt(robotxPos, robotyPos, robotW, robotH) {
-        return this.yPosS + 20 >= robotyPos && this.yPosS + 20 <= robotyPos + robotH && this.xPosS >= robotxPos && this.xPosS <= robotxPos + robotW;
+    isGepakt(robotxPos, robotyPos, robotw, roboth) {
+        return this.yPosS + 20 >= robotyPos && this.yPosS + 20 <= robotyPos + roboth && this.xPosS >= robotxPos && this.xPosS <= robotxPos + robotw;
     }
 }
