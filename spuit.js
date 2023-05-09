@@ -5,14 +5,14 @@ class spuit {
         this.yPos = yPosS;
         this.speedB = speedS;
         this.bodycolorB = bodycolorS;
-        this.bidonsizeB = spuitsizeS;
-        this.gepakt = false;
+        this.spuitSize = spuitsizeS;
+        this.nietgepakt = true;
     }
 
     display() {
         push();
-        translate(this.xPosS, this.yPosS);
-        scale(this.spuitsizeS);
+        translate(this.xPos, this.yPos);
+        scale(this.spuitSize);
 
         // draw spuit body
         fill(255, 255, 255);
@@ -39,11 +39,13 @@ class spuit {
         pop();
     }
 
-    update() {
+    move() { //de spuit laten vallen vanuit de lucht
         this.yPosS += this.speedS;
     }
 
-    isGepakt(robotxPos, robotyPos, robotw, roboth) {
-        return this.yPosS + 20 >= robotyPos && this.yPosS + 20 <= robotyPos + roboth && this.xPosS >= robotxPos && this.xPosS <= robotxPos + robotw;
+    isGepakt() {
+        if (dist(mouseX, mouseY, this.xPos, this.yPos) < 40) {
+            this.nietgepakt = false;
+        }
     }
 }

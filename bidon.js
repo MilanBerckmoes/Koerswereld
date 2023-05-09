@@ -5,14 +5,14 @@ class bidon {
         this.yPos = yPosB;
         this.speedB = speedB;
         this.bodycolorB = bodycolorB;
-        this.bidonsizeB = bidonsizeB;
-        this.gepakt = false;
+        this.bidonSize = bidonsizeB;
+        this.nietgepakt = true;
     }
 
     display() {
         push();
-        translate(this.xPosB, this.yPosB);
-        scale(this.bidonsizeB);
+        translate(this.xPos, this.yPos);
+        scale(this.bidonSize);
 
         // Draw bottle
         fill(255);
@@ -29,11 +29,17 @@ class bidon {
 
     }
 
-    update() {
+    move() {
         this.yPosB += this.speedB;
     }
 
     isGepakt(robotX, robotY, robotW, robotH) {
         return this.yPosB + 20 >= robotY && this.yPosB + 20 <= robotY + robotH && this.xPosB >= robotX && this.xPosB <= robotX + robotW;
+    }
+
+    isGepakt() {
+        if (dist(mouseX, mouseY, this.xPos, this.yPos) < 40) {
+            this.nietgepakt = false;
+        }
     }
 }

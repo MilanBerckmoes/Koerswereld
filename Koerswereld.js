@@ -1,8 +1,8 @@
 let myRobot;
 let backgroundImg;
-let bidon = [];
-let spuit = [];
-let score = 0;
+let bidons = [];
+let spuiten = [];
+let score;
 let timeLeft = 20;
 
 function preload() {
@@ -13,6 +13,8 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
     backgroundImg.resize(width, height);
     myRobot = new robot();
+    myRobot.yPos = 500;
+    score = 0;
 }
 
 function windowResized() {
@@ -22,52 +24,51 @@ function windowResized() {
 
 function draw() {
     image(backgroundImg, 0, 0);
-    myRobot.update(); //beweeg robot met muis
     myRobot.display(); //teken robot
 
     //teken bidons
-    for (let i = bidon.length - 1; i >= 0; i--) {
-        let bidon = bidon[i];
-        bidon.update();
-        bidon.display();
+    for (let i = bidons.length - 1; i >= 0; i--) {
+        let bidons = bidons[i];
+        bidons.update();
+        bidons.display();
 
         // kijken of bidon gepakt is
-        if (myRobot.isGepakt(bidon)) {
-            bidon.splice(i, 1);
+        if (myRobot.isGepakt(bidons)) {
+            bidons.splice(i, 1);
         }
 
         // kijken of bidon gemist is
-        if (bidon.y > height) {
-            bidon.splice(i, 1);
+        if (bidons.y > height) {
+            bidons.splice(i, 1);
         }
     }
 
     //teken spuiten
-    for (let i = spuit.length - 1; i >= 0; i--) {
-        let spuit = spuit[i];
-        spuit.update();
-        spuit.display();
+    for (let i = spuiten.length - 1; i >= 0; i--) {
+        let spuiten = spuiten[i];
+        spuiten.update();
+        spuiten.display();
 
 
         //kijken of spuit gepakt is
-        if (myRobot.isGepakt(spuit)) {
+        if (myRobot.isGepakt(spuiten)) {
             score--;
-            spuit.splice(i, 1);
+            spuiten.splice(i, 1);
         }
 
         //kijken of spuit gemist is
-        if (spuit.y > height) {
-            spuit.splice(i, 1);
+        if (spuiten.y > height) {
+            spuiten.splice(i, 1);
         }
     }
 
     // Voeg nieuwe bidon of spuit toe elke seconde
     if (frameCount % 60 == 0) {
         if (random(1) < 0.5) {
-            bidon.push(new bidon(random(width), 0, random(3, 5)));
+            bidons.push(new bidons(random(width), 0, random(3, 5)));
         }
         else {
-            spuit.push(new spuit(random(width), 0, random(3, 5)));
+            spuiten.push(new spuiten(random(width), 0, random(3, 5)));
         }
 
     }

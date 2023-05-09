@@ -1,14 +1,12 @@
 class robot {
 
   constructor() { //default constructor
-    this.xPos = width / 2 - this.w / 2;
-    this.yPos = height - this.h - 10;
+    this.xPos = width / 2;
+    this.yPos = height / 2;
     this.bodyheadColor = color(200);
     this.bikeColor1 = color(255);
     this.bikeColor2 = color(0);
     this.robotSize = 1;
-    this.w = w;
-    this.h = h;
     this.timeDelay = 500;
     this.timeDelayTrigger = false;
     this.timer = 0;
@@ -99,8 +97,9 @@ class robot {
     line(-5, -bodyHeight - 70, -5, -bodyHeight - 60);//tanden
   }
 
-  update() {
-    this.xPos = mouseX - this.w / 2;
+  move() {
+    this.xPos = mouseX;
+    this.yPos = mouseY;
   }
 
   isGepakt(bidonOfspuit) {
