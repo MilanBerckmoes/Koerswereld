@@ -15,16 +15,16 @@ class bidon {
         scale(this.bidonSize);
 
         // Draw bottle
-        fill(255);
+        fill(0, 120, 255);
         stroke(0);
         strokeWeight(2);
-        rect(150, 100, 100, 200, 20);
+        rect(0, 0, 100, 200, 20);
 
         // Draw cap
         fill(0);
         noStroke();
-        rect(170, 70, 60, 30, 7);
-        rect(185, 40, 30, 30, 5);
+        rect(20, -30, 60, 30, 7);
+        rect(35, -60, 30, 30, 5);
         pop();
 
     }

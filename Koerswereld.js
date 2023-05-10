@@ -12,7 +12,7 @@ function preload() {
 function setup() {
     createCanvas(windowWidth, windowHeight);
     backgroundImg.resize(width, height);
-    myRobot = new robot();
+    myRobot = new robot(70, -70, 5);
     myRobot.yPos = 500;
     score = 0;
 }
@@ -33,7 +33,7 @@ function draw() {
         bidon.display();
 
         // kijken of bidon gepakt is
-        if (myRobot.isGepakt(bidon)) {
+        if (myRobot.isHit(bidon)) {
             score++;
             bidons.splice(i, 1);
         }
@@ -50,9 +50,8 @@ function draw() {
         spuit.update();
         spuit.display();
 
-
         //kijken of spuit gepakt is
-        if (myRobot.isGepakt(spuit)) {
+        if (myRobot.isHit(spuit)) {
             score--;
             spuiten.splice(i, 1);
         }
@@ -66,7 +65,7 @@ function draw() {
     // Voeg nieuwe bidon of spuit toe elke seconde
     if (frameCount % 60 == 0) {
         if (random(1) < 0.5) {
-            bidons.push(new bidon(random(width), 0, random(3, 7), color(200), 0.5));
+            bidons.push(new bidon(random(width), 0, random(3, 7), color(200), 0.3));
         }
         else {
             spuiten.push(new spuit(random(width), 0, random(3, 7), color(200), 0.5));

@@ -1,12 +1,17 @@
 class robot {
 
-  constructor() { //default constructor
+  constructor(w, h, speedRobot) { //default constructor
+    this.w = w;
+    this.h = h;
+    this.speedRobot = speedRobot;
     this.xPos = width / 2;
-    this.yPos = height / 2;
+    this.yPos = height - this.h - 10;
+
     this.bodyheadColor = color(200);
     this.bikeColor1 = color(255);
     this.bikeColor2 = color(0);
-    this.robotSize = 1;
+    this.robotSize = 0.8;
+
     this.timeDelay = 500;
     this.timeDelayTrigger = false;
     this.timer = 0;
@@ -35,7 +40,7 @@ class robot {
     rect(0, 40, windowWidth, 10);
 
     strokeWeight(2);
-    translate(mouseX, mouseY);  // Move all to (mouseX, y)
+    translate(mouseX, this.yPos + 200);  // Move all to (mouseX, y)
     if (mouseIsPressed) {
       scale(2.0); //2 keer zo groot als muis ingedrukt is
     } else {
@@ -81,7 +86,7 @@ class robot {
     ellipse(40, -50, 5, 5); //rechterhand
 
     //head
-    rect(-50, -bodyHeight - 50, 70, -70); //head
+    rect(-50, -bodyHeight - 50, this.w, this.h); //head
     rect(-60, -bodyHeight - 100, 10, 35); //linkeroor
     rect(20, -bodyHeight - 100, 10, 35); //rechteroor
     ellipse(-30, -bodyHeight - 95, 15, 15);//linkeroog
@@ -99,12 +104,14 @@ class robot {
     pop();
   }
 
+  update() {
+    this.xPos = mouseX - this.w / 2;
+  }
   move() {
     this.xPos = mouseX;
-    this.yPos = mouseY;
   }
 
-  isGepakt(bidonOfspuit) {
+  isHit(bidonOfspuit) {
     return bidonOfspuit.isGepakt(this.xPos, this.yPos, this.w, this.h);
   }
 }

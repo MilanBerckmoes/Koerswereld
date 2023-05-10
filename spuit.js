@@ -3,10 +3,9 @@ class spuit {
     constructor(xPosS, yPosS, speedS, bodycolorS, spuitsizeS) {
         this.xPos = xPosS;
         this.yPos = yPosS;
-        this.speedB = speedS;
-        this.bodycolorB = bodycolorS;
+        this.speed = speedS;
+        this.bodycolor = bodycolorS;
         this.spuitSize = spuitsizeS;
-        this.nietgepakt = true;
     }
 
     display() {
@@ -15,9 +14,9 @@ class spuit {
         scale(this.spuitSize);
 
         // draw spuit body
-        fill(255, 255, 255);
+        fill(255, 0, 0);
         strokeWeight(2);
-        stroke(0);
+        stroke(255);
         rect(150, 200, 100, 30);
 
         // draw spuit plunger
@@ -40,16 +39,14 @@ class spuit {
     }
 
     update() {
-        this.yPos += this.speedS
+        this.yPos += this.speed
     }
 
     move() { //de spuit laten vallen vanuit de lucht
-        this.yPosS += this.speedS;
+        this.yPos += this.speed;
     }
 
-    isGepakt() {
-        if (dist(mouseX, mouseY, this.xPos, this.yPos) < 40) {
-            this.nietgepakt = false;
-        }
+    isGepakt(robotX, robotY, robotW, robotH) {
+        return this.yPos + 20 >= robotY && this.yPos + 20 <= robotY + robotH && this.xPos >= robotX && this.xPos <= robotX + robotW;
     }
 }
