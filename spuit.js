@@ -43,7 +43,7 @@ class spuit {
     }
 
     isGenomen(robotX, robotY) {
-        if (dist(robotX, robotY, this.xPos - 150, this.yPos) < 50) {
+        if (dist(robotX - 100, robotY - 50, this.xPos, this.yPos) < 50) {
             return true;
         }
         else {

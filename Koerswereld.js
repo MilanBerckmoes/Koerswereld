@@ -13,7 +13,7 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
     backgroundImg.resize(width, height);
     myRobot = new robot(70, -70, 5);
-    myRobot.yPos = 746;
+    myRobot.yPos = 700;
     score = 0;
 }
 
@@ -74,6 +74,7 @@ function draw() {
     }
 
     // Toon score en time left
+    fill(255);
     textSize(20);
     text('Score = ' + score, 20, 30);
     text('Time left: ' + timeLeft, width - 140, 30);

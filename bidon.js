@@ -35,7 +35,7 @@ class bidon {
 
 
     isGenomen(robotX, robotY) {
-        if (dist(robotX, robotY, this.xPos, this.yPos) < 50) {
+        if (dist(robotX - 30, robotY, this.xPos, this.yPos) < 50) {
             return true;
         }
         else {
