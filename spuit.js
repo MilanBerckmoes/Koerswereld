@@ -42,11 +42,16 @@ class spuit {
         this.yPos += this.speed
     }
 
-    move() { //de spuit laten vallen vanuit de lucht
-        this.yPos += this.speed;
+    isGenomen(robotX, robotY) {
+        if (dist(robotX, robotY, this.xPos - 150, this.yPos) < 50) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     isGepakt(robotX, robotY, robotW, robotH) {
-        return this.yPos + 20 >= robotY && this.yPos + 20 <= robotY + robotH && this.xPos >= robotX && this.xPos <= robotX + robotW;
+        return this.yPos + 50 >= robotY && this.yPos + 50 <= robotY + robotH && this.xPos >= robotX && this.xPos <= robotX + robotW + 100;
     }
 }

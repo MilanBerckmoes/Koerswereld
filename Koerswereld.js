@@ -13,7 +13,7 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
     backgroundImg.resize(width, height);
     myRobot = new robot(70, -70, 5);
-    myRobot.yPos = 500;
+    myRobot.yPos = 746;
     score = 0;
 }
 
@@ -33,7 +33,7 @@ function draw() {
         bidon.display();
 
         // kijken of bidon gepakt is
-        if (myRobot.isHit(bidon)) {
+        if (myRobot.isRaak(bidon)) {
             score++;
             bidons.splice(i, 1);
         }
@@ -51,7 +51,7 @@ function draw() {
         spuit.display();
 
         //kijken of spuit gepakt is
-        if (myRobot.isHit(spuit)) {
+        if (myRobot.isRaak(spuit)) {
             score--;
             spuiten.splice(i, 1);
         }

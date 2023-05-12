@@ -6,7 +6,7 @@ class bidon {
         this.speedB = speedB;
         this.bodycolorB = bodycolorB;
         this.bidonSize = bidonsizeB;
-        this.nietgepakt = true;
+        this.nietgenomen = true;
     }
 
     display() {
@@ -33,17 +33,17 @@ class bidon {
         this.yPos += this.speedB
     }
 
-    move() {
-        this.yPosB += this.speedB;
+
+    isGenomen(robotX, robotY) {
+        if (dist(robotX, robotY, this.xPos, this.yPos) < 50) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     isGepakt(robotX, robotY, robotW, robotH) {
-        return this.yPosB + 20 >= robotY && this.yPosB + 20 <= robotY + robotH && this.xPosB >= robotX && this.xPosB <= robotX + robotW;
-    }
-
-    isGepakt() {
-        if (dist(mouseX, mouseY, this.xPos, this.yPos) < 40) {
-            this.nietgepakt = false;
-        }
+        return this.yPos + 20 >= robotY && this.yPos + 20 <= robotY + robotH && this.xPos >= robotX && this.xPos <= robotX + robotW;
     }
 }
