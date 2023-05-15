@@ -125,6 +125,8 @@ function restart() {
     timeLeft = 20;
     bidons = [];
     spuiten = [];
+    winningSound.stop();
+    gameSound.play();
     loop();
 
     restartButton.hide();
