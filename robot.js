@@ -41,12 +41,6 @@ class robot {
 
     strokeWeight(2);
     translate(mouseX, this.yPos);  // Move all to (mouseX, y)
-    if (mouseIsPressed) {
-      scale(2 * this.robotSize); //2 keer zo groot als muis ingedrukt is
-    } else {
-      scale(this.robotSize);
-    }
-
     //bike
     push();
     if (millis() - this.timer > this.timeDelay) {

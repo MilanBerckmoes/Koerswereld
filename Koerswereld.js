@@ -4,6 +4,7 @@ let bidons = [];
 let spuiten = [];
 let score;
 let timeLeft = 20;
+let restartButton;
 
 function preload() {
     backgroundImg = loadImage('data/cobbles.jpg');
@@ -15,6 +16,14 @@ function setup() {
     myRobot = new robot(70, -70, 5);
     myRobot.yPos = 700;
     score = 0;
+
+    restartButton = createButton("Replay!");
+    restartButton.mouseClicked(restart);
+    restartButton.size(100, 50);
+    restartButton.style("font-family", "Arial");
+    restartButton.style("font-size", "20px");
+    restartButton.position(width / 2, height / 2);
+    restartButton.hide();
 }
 
 function windowResized() {
@@ -87,5 +96,12 @@ function draw() {
         noLoop();
         textSize(30);
         text('Game over! Your score is ' + score, width / 2 - 170, height / 2);
+        restartButton.show();
     }
+}
+
+function restart() {
+    score = 0;
+    restartButton.hide();
+    timeLeft = 20;
 }
