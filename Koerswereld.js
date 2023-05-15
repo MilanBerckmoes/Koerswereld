@@ -6,11 +6,13 @@ let score;
 let timeLeft = 20;
 let restartButton;
 let gameSound;
+let startButton;
 
 function preload() {
     backgroundImg = loadImage('data/cobbles.jpg');
     soundFormats('mp3');
     gameSound = loadSound('data/Rodania.mp3');
+    winningSound = loadSound('data/TomBoonen');
 }
 
 function setup() {
@@ -19,6 +21,13 @@ function setup() {
     myRobot = new robot(70, -70, 5);
     myRobot.yPos = height - 50;
     score = 0;
+
+    startButton = createButton("Play!");
+    startButton.mouseClicked(gameStarted);
+    startButton.size(100, 50);
+    startButton.style("font-family", "Arial");
+    startButton.style("font-size", "20px");
+    startButton.position(width / 2 - 50, height / 2 + 50);
 
     restartButton = createButton("Replay!");
     restartButton.mouseClicked(restart);
@@ -94,20 +103,21 @@ function draw() {
     // Verminder time left
     timeLeft -= 1 / 60;
 
-    //gameSound laten afspelen tijdens het spel
-    if (timeLeft > 0) {
-        if (!gameSound.isPlaying()) {
-            gameSound.play();
-        }
-    }
     //beëindig spel als de tijd op is
     if (timeLeft <= 0) {
         noLoop();
+        gameSound.stop();
+        winningSound.play();
         textSize(30);
         text('Game over! Your score is ' + score, width / 2 - 170, height / 2);
         restartButton.show();
-        gameSound.stop();
     }
+}
+
+function gameStarted() {
+    gameSound.play();
+    loop();
+    startButton.hide();
 }
 
 function restart() {
