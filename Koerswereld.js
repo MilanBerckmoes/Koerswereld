@@ -22,7 +22,7 @@ function setup() {
     restartButton.size(100, 50);
     restartButton.style("font-family", "Arial");
     restartButton.style("font-size", "20px");
-    restartButton.position(width / 2, height / 2);
+    restartButton.position(width / 2 - 50, height / 2 + 50);
     restartButton.hide();
 }
 
@@ -102,6 +102,10 @@ function draw() {
 
 function restart() {
     score = 0;
-    restartButton.hide();
     timeLeft = 20;
+    bidons = [];
+    spuiten = [];
+    loop();
+
+    restartButton.hide();
 }
