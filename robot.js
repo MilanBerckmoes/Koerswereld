@@ -103,7 +103,7 @@ class robot {
   }
 
   isRaak(bidonOfspuit) {
-    return bidonOfspuit.isGenomen(mouseX, 500);
+    return bidonOfspuit.isGenomen(mouseX, height - 250);
   }
 
   isHit(bidonOfspuit) {
