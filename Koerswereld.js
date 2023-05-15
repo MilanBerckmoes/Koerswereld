@@ -5,16 +5,19 @@ let spuiten = [];
 let score;
 let timeLeft = 20;
 let restartButton;
+let gameSound;
 
 function preload() {
     backgroundImg = loadImage('data/cobbles.jpg');
+    soundFormats('mp3');
+    gameSound = loadSound('data/Rodania.mp3');
 }
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
     backgroundImg.resize(width, height);
     myRobot = new robot(70, -70, 5);
-    myRobot.yPos = 700;
+    myRobot.yPos = height - 50;
     score = 0;
 
     restartButton = createButton("Replay!");
@@ -91,12 +94,19 @@ function draw() {
     // Verminder time left
     timeLeft -= 1 / 60;
 
+    //gameSound laten afspelen tijdens het spel
+    if (timeLeft > 0) {
+        if (!gameSound.isPlaying()) {
+            gameSound.play();
+        }
+    }
     //beëindig spel als de tijd op is
     if (timeLeft <= 0) {
         noLoop();
         textSize(30);
         text('Game over! Your score is ' + score, width / 2 - 170, height / 2);
         restartButton.show();
+        gameSound.stop();
     }
 }
 
