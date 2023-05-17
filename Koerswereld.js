@@ -68,9 +68,6 @@ function draw() {
         drops.display();
     }
 
-    // Change the value of directionAngle variable to set the desired direction
-    directionAngle = 0;
-
     if (gameOn) {
         //teken bidons
         for (let i = bidons.length - 1; i >= 0; i--) {
@@ -159,3 +156,5 @@ function restart() {
     restartButton.hide();
     gameOn = true;
 }
+
+directionAngle = 25;
