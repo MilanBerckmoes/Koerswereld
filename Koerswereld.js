@@ -9,6 +9,9 @@ let gameSound;
 let startButton;
 let gameOn = false;
 
+let raindrops = [];
+let directionAngle;
+
 function preload() {
     backgroundImg = loadImage('data/cobbles.jpg');
     soundFormats('mp3');
@@ -39,6 +42,14 @@ function setup() {
     restartButton.style("font-size", "20px");
     restartButton.position(width / 2 - 50, height / 2 + 50);
     restartButton.hide();
+
+    // Generate raindrops
+    for (let i = 0; i < 100; i++) {
+        let x = random(width);
+        let y = random(height);
+        let windSpeed = 3.13;
+        raindrops.push(new Raindrop(x, y, directionAngle, windSpeed));
+    }
 }
 
 function windowResized() {
@@ -49,6 +60,16 @@ function windowResized() {
 function draw() {
     image(backgroundImg, 0, 0);
     myRobot.display(); //teken robot
+
+    // Update and display each raindrop
+    for (let i = 0; i < raindrops.length; i++) {
+        let drops = raindrops[i];
+        drops.update();
+        drops.display();
+    }
+
+    // Change the value of directionAngle variable to set the desired direction
+    directionAngle = 0;
 
     if (gameOn) {
         //teken bidons
