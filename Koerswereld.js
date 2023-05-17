@@ -14,6 +14,8 @@ function preload() {
     soundFormats('mp3');
     gameSound = loadSound('data/Rodania.mp3');
     winningSound = loadSound('data/TomBoonen');
+    bidonSound = loadSound('data/bidonsound');
+    spuitSound = loadSound('data/spuitsound');
 }
 
 function setup() {
@@ -59,6 +61,7 @@ function draw() {
             if (myRobot.isRaak(bidon)) {
                 score++;
                 bidons.splice(i, 1);
+                bidonSound.play();
             }
 
             // kijken of bidon gemist is
@@ -77,6 +80,7 @@ function draw() {
             if (myRobot.isRaak(spuit)) {
                 score--;
                 spuiten.splice(i, 1);
+                spuitSound.play();
             }
 
             //kijken of spuit gemist is
