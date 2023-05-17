@@ -7,6 +7,7 @@ let timeLeft = 20;
 let restartButton;
 let gameSound;
 let startButton;
+let gameOn = false;
 
 function preload() {
     backgroundImg = loadImage('data/cobbles.jpg');
@@ -47,74 +48,76 @@ function draw() {
     image(backgroundImg, 0, 0);
     myRobot.display(); //teken robot
 
-    //teken bidons
-    for (let i = bidons.length - 1; i >= 0; i--) {
-        let bidon = bidons[i];
-        bidon.update();
-        bidon.display();
+    if (gameOn) {
+        //teken bidons
+        for (let i = bidons.length - 1; i >= 0; i--) {
+            let bidon = bidons[i];
+            bidon.update();
+            bidon.display();
 
-        // kijken of bidon gepakt is
-        if (myRobot.isRaak(bidon)) {
-            score++;
-            bidons.splice(i, 1);
+            // kijken of bidon gepakt is
+            if (myRobot.isRaak(bidon)) {
+                score++;
+                bidons.splice(i, 1);
+            }
+
+            // kijken of bidon gemist is
+            if (bidon.yPos > height) {
+                bidons.splice(i, 1);
+            }
         }
 
-        // kijken of bidon gemist is
-        if (bidon.yPos > height) {
-            bidons.splice(i, 1);
-        }
-    }
+        //teken spuiten
+        for (let i = spuiten.length - 1; i >= 0; i--) {
+            let spuit = spuiten[i];
+            spuit.update();
+            spuit.display();
 
-    //teken spuiten
-    for (let i = spuiten.length - 1; i >= 0; i--) {
-        let spuit = spuiten[i];
-        spuit.update();
-        spuit.display();
+            //kijken of spuit gepakt is
+            if (myRobot.isRaak(spuit)) {
+                score--;
+                spuiten.splice(i, 1);
+            }
 
-        //kijken of spuit gepakt is
-        if (myRobot.isRaak(spuit)) {
-            score--;
-            spuiten.splice(i, 1);
-        }
-
-        //kijken of spuit gemist is
-        if (spuit.yPos > height) {
-            spuiten.splice(i, 1);
-        }
-    }
-
-    // Voeg nieuwe bidon of spuit toe elke seconde
-    if (frameCount % 60 == 0) {
-        if (random(1) < 0.5) {
-            bidons.push(new bidon(random(width), 0, random(3, 7), color(200), 0.3));
-        }
-        else {
-            spuiten.push(new spuit(random(width), 0, random(3, 7), color(200), 0.5));
+            //kijken of spuit gemist is
+            if (spuit.yPos > height) {
+                spuiten.splice(i, 1);
+            }
         }
 
-    }
+        // Voeg nieuwe bidon of spuit toe elke seconde
+        if (frameCount % 60 == 0) {
+            if (random(1) < 0.5) {
+                bidons.push(new bidon(random(width), 0, random(3, 7), color(200), 0.3));
+            }
+            else {
+                spuiten.push(new spuit(random(width), 0, random(3, 7), color(200), 0.5));
+            }
 
-    // Toon score en time left
-    fill(255);
-    textSize(20);
-    text('Score = ' + score, 20, 30);
-    text('Time left: ' + timeLeft, width - 140, 30);
+        }
 
-    // Verminder time left
-    timeLeft -= 1 / 60;
+        // Toon score en time left
+        fill(255);
+        textSize(20);
+        text('Score = ' + score, 20, 30);
+        text('Time left: ' + timeLeft, width - 140, 30);
 
-    //beëindig spel als de tijd op is
-    if (timeLeft <= 0) {
-        noLoop();
-        gameSound.stop();
-        winningSound.play();
-        textSize(30);
-        text('Game over! Your score is ' + score, width / 2 - 170, height / 2);
-        restartButton.show();
+        // Verminder time left
+        timeLeft -= 1 / 60;
+
+        //beëindig spel als de tijd op is
+        if (timeLeft <= 0) {
+            noLoop();
+            gameSound.stop();
+            winningSound.play();
+            textSize(30);
+            text('Game over! Your score is ' + score, width / 2 - 170, height / 2);
+            restartButton.show();
+        }
     }
 }
-
 function gameStarted() {
+    gameOn = true;
     gameSound.play();
     loop();
     startButton.hide();
@@ -128,6 +131,6 @@ function restart() {
     winningSound.stop();
     gameSound.play();
     loop();
-
     restartButton.hide();
+    gameOn = true;
 }
