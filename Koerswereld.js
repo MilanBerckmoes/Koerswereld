@@ -9,8 +9,21 @@ let gameSound;
 let startButton;
 let gameOn = false;
 
-let raindrops = [];
-let directionAngle;
+let windstoten = [];
+let windRichting;
+let weatherData;
+let windSnelheid;
+let windDirection;
+
+//weerdata ophalen en windsnelheid obv windstoten en angle obv degree
+function gotWeatherData(data) {
+    weatherData = data;
+    if (weatherData) {
+        windSnelheid = weatherData.wind.gust;
+        windDirection = weatherData.wind.deg;
+        windRichting = windDirection;
+    }
+}
 
 function preload() {
     backgroundImg = loadImage('data/cobbles.jpg');
@@ -19,6 +32,8 @@ function preload() {
     winningSound = loadSound('data/TomBoonen');
     bidonSound = loadSound('data/bidonsound');
     spuitSound = loadSound('data/spuitsound');
+    //Load current weatherdata in Kortrijk
+    loadJSON('https://api.openweathermap.org/data/2.5/weather?q=Kortrijk,be&appid=276a00d1cf36f1c2b52ae48758fce6ea', gotWeatherData);
 }
 
 function setup() {
@@ -47,8 +62,8 @@ function setup() {
     for (let i = 0; i < 100; i++) {
         let x = random(width);
         let y = random(height);
-        let windSpeed = 3.13;
-        raindrops.push(new Raindrop(x, y, directionAngle, windSpeed));
+        let windSpeed = windSnelheid;
+        windstoten.push(new windStoot(x, y, windRichting, windSpeed));
     }
 }
 
@@ -62,10 +77,10 @@ function draw() {
     myRobot.display(); //teken robot
 
     // Update and display each raindrop
-    for (let i = 0; i < raindrops.length; i++) {
-        let drops = raindrops[i];
-        drops.update();
-        drops.display();
+    for (let i = 0; i < windstoten.length; i++) {
+        let vlagen = windstoten[i];
+        vlagen.update();
+        vlagen.display();
     }
 
     if (gameOn) {
@@ -156,5 +171,3 @@ function restart() {
     restartButton.hide();
     gameOn = true;
 }
-
-directionAngle = 25;

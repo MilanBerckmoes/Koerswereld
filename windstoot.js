@@ -1,4 +1,4 @@
-class Raindrop {
+class windStoot {
     constructor(x, y, angle, windSpeed) {
         this.position = createVector(x, y);
         this.angle = angle;
@@ -10,8 +10,6 @@ class Raindrop {
 
     update() {
         this.position.add(this.direction);
-
-        // Wrap the raindrops around the canvas
         if (this.position.x < 0) {
             this.position.x = width;
         } else if (this.position.x > width) {
@@ -29,12 +27,10 @@ class Raindrop {
         push();
         stroke(255);
         strokeWeight(this.strokeWeight);
-        line(
-            this.position.x,
+        line(this.position.x,
             this.position.y,
             this.position.x + cos(radians(this.angle)) * this.length,
-            this.position.y + sin(radians(this.angle)) * this.length
-        );
+            this.position.y + sin(radians(this.angle)) * this.length);
         pop();
     }
 }
