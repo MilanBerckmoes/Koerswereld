@@ -15,6 +15,9 @@ let weatherData;
 let windSnelheid;
 let windDirection;
 
+let level = 1;
+let nextLevelButton;
+
 //weerdata ophalen en windsnelheid obv windstoten en angle obv degree
 function gotWeatherData(data) {
     weatherData = data;
@@ -57,6 +60,14 @@ function setup() {
     restartButton.style("font-size", "20px");
     restartButton.position(width / 2 - 50, height / 2 + 50);
     restartButton.hide();
+
+    nextLevelButton = createButton("Next Level!");
+    nextLevelButton.mouseClicked(nextLevel);
+    nextLevelButton.size(100, 50);
+    nextLevelButton.style("font-family", "Arial");
+    nextLevelButton.style("font-size", "20px");
+    nextLevelButton.position(width / 2 - 50, height / 2 + 150);
+    nextLevelButton.hide();
 
     // Generate raindrops
     for (let i = 0; i < 100; i++) {
@@ -124,21 +135,38 @@ function draw() {
 
         // Voeg nieuwe bidon of spuit toe elke seconde
         if (frameCount % 60 == 0) {
-            if (random(1) < 0.5) {
-                bidons.push(new bidon(random(width), 0, random(3, 7), color(200), 0.3));
+            if (level == 1) {
+                if (random(1) < 0.5) {
+                    bidons.push(new bidon(random(width), 0, random(3, 7), color(200), 0.3));
+                }
+                else {
+                    spuiten.push(new spuit(random(width), 0, random(3, 7), color(200), 0.5));
+                }
             }
-            else {
-                spuiten.push(new spuit(random(width), 0, random(3, 7), color(200), 0.5));
+            if (level == 2) {
+                if (random(1) < 0.5) {
+                    bidons.push(new bidon(random(width), 0, random(7, 11), color(200), 0.3));
+                }
+                else {
+                    spuiten.push(new spuit(random(width), 0, random(7, 11), color(200), 0.5));
+                }
             }
-
+            if (level == 3) {
+                if (random(1) < 0.5) {
+                    bidons.push(new bidon(random(width), 0, random(11, 15), color(200), 0.3));
+                }
+                else {
+                    spuiten.push(new spuit(random(width), 0, random(11, 15), color(200), 0.5));
+                }
+            }
         }
 
-        // Toon score en time left
+        // Toon score, time left en level
         fill(255);
         textSize(20);
         text('Score = ' + score, 20, 30);
         text('Time left: ' + timeLeft, width - 140, 30);
-
+        text('Level ' + level, width / 2, 30);
         // Verminder time left
         timeLeft -= 1 / 60;
 
@@ -150,6 +178,9 @@ function draw() {
             textSize(30);
             text('Game over! Your score is ' + score, width / 2 - 170, height / 2);
             restartButton.show();
+            if (level < 3) {
+                nextLevelButton.show();
+            }
         }
     }
 }
@@ -167,7 +198,22 @@ function restart() {
     spuiten = [];
     winningSound.stop();
     gameSound.play();
+    level = 1;
     loop();
+    restartButton.hide();
+    gameOn = true;
+}
+
+function nextLevel() {
+    level += 1;
+    score = 0;
+    timeLeft = 20;
+    bidons = [];
+    spuiten = [];
+    winningSound.stop();
+    gameSound.play();
+    loop();
+    nextLevelButton.hide();
     restartButton.hide();
     gameOn = true;
 }
