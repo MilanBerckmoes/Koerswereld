@@ -30,7 +30,7 @@ function gotWeatherData(data) {
 
 function preload() {
     backgroundImg = loadImage('data/cobbles.jpg');
-    soundFormats('mp3');
+    soundFormats('MP3');
     gameSound = loadSound('data/Rodania.mp3');
     winningSound = loadSound('data/TomBoonen.mp3');
     bidonSound = loadSound('data/bidonsound.mp3');
