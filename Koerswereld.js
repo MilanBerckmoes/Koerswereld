@@ -29,14 +29,14 @@ function gotWeatherData(data) {
 }
 
 function preload() {
-    backgroundImg = loadImage('data/cobbles.jpg');
+    //Load current weatherdata in Kortrijk
+    loadJSON('https://api.openweathermap.org/data/2.5/weather?q=Kortrijk,be&appid=276a00d1cf36f1c2b52ae48758fce6ea', gotWeatherData);
     soundFormats('MP3');
     gameSound = loadSound('data/Rodania');
     winningSound = loadSound('data/TomBoonen');
     bidonSound = loadSound('data/bidonsound');
     spuitSound = loadSound('data/spuitsound');
-    //Load current weatherdata in Kortrijk
-    loadJSON('https://api.openweathermap.org/data/2.5/weather?q=Kortrijk,be&appid=276a00d1cf36f1c2b52ae48758fce6ea', gotWeatherData);
+    backgroundImg = loadImage('data/cobbles.jpg');
 }
 
 function setup() {
