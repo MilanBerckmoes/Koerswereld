@@ -6,7 +6,6 @@ class bidon {
         this.speedB = speedB;
         this.bodycolorB = bodycolorB;
         this.bidonSize = bidonsizeB;
-        this.nietgenomen = true;
     }
 
     display() {
@@ -14,13 +13,13 @@ class bidon {
         translate(this.xPos, this.yPos);
         scale(this.bidonSize);
 
-        // Draw bottle
+        //teken fles
         fill(0, 120, 255);
         stroke(0);
         strokeWeight(2);
         rect(0, 0, 100, 200, 20);
 
-        // Draw cap
+        //teken dop
         fill(0);
         noStroke();
         rect(20, -30, 60, 30, 7);
@@ -33,7 +32,7 @@ class bidon {
         this.yPos += this.speedB
     }
 
-
+    //functie om te zien of de bidon genomen is
     isGenomen(robotX, robotY) {
         if (dist(robotX - 30, robotY, this.xPos, this.yPos) < 50) {
             return true;
@@ -41,9 +40,5 @@ class bidon {
         else {
             return false;
         }
-    }
-
-    isGepakt(robotX, robotY, robotW, robotH) {
-        return this.yPos + 20 >= robotY && this.yPos + 20 <= robotY + robotH && this.xPos >= robotX && this.xPos <= robotX + robotW;
     }
 }

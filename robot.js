@@ -97,16 +97,12 @@ class robot {
     line(-5, -bodyHeight - 70, -5, -bodyHeight - 60);//tanden
     pop();
   }
-
+  //x-positie van de robot aanpassen aan de x-positie van de muis
   update() {
     this.xPos = mouseX;
   }
-
+  //functie om te kijken of een bidon of spuit door de robot is genomen
   isRaak(bidonOfspuit) {
     return bidonOfspuit.isGenomen(mouseX, height - 250);
-  }
-
-  isHit(bidonOfspuit) {
-    return bidonOfspuit.isGepakt(mouseX, 700, this.w, this.h);
   }
 }

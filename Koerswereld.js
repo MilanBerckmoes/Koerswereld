@@ -31,28 +31,31 @@ function gotWeatherData(data) {
 function preload() {
     //Load current weatherdata in Kortrijk
     loadJSON('https://api.openweathermap.org/data/2.5/weather?q=Kortrijk,be&appid=276a00d1cf36f1c2b52ae48758fce6ea', gotWeatherData);
+    //geluidsfragmenten inladen
     soundFormats('MP3');
     gameSound = loadSound('data/Rodania');
     winningSound = loadSound('data/TomBoonen');
     bidonSound = loadSound('data/bidonsound');
     spuitSound = loadSound('data/spuitsound');
+    //achtergrondfoto inladen
     backgroundImg = loadImage('data/cobbles.jpg');
 }
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
     backgroundImg.resize(width, height);
+    //robot toevoegen
     myRobot = new robot(70, -70, 5);
     myRobot.yPos = height - 50;
     score = 0;
-
+    //startknop toevoegen + uitleg game
     startButton = createButton("Play!");
     startButton.mouseClicked(gameStarted);
     startButton.size(100, 50);
     startButton.style("font-family", "Arial");
     startButton.style("font-size", "20px");
     startButton.position(width / 2 - 50, height / 2 + 50);
-
+    //replay knop toevoegen
     restartButton = createButton("Replay!");
     restartButton.mouseClicked(restart);
     restartButton.size(100, 50);
@@ -60,7 +63,7 @@ function setup() {
     restartButton.style("font-size", "20px");
     restartButton.position(width / 2 - 50, height / 2 + 50);
     restartButton.hide();
-
+    //knop voor volgend level toevoegen
     nextLevelButton = createButton("Next Level!");
     nextLevelButton.mouseClicked(nextLevel);
     nextLevelButton.size(100, 50);
@@ -69,7 +72,7 @@ function setup() {
     nextLevelButton.position(width / 2 - 50, height / 2 + 150);
     nextLevelButton.hide();
 
-    // Generate raindrops
+    //windstoten genereren zodat ze in dezelfde richting en snelheid vallen als het huidige weer in Kortrijk
     for (let i = 0; i < 100; i++) {
         let x = random(width);
         let y = random(height);
@@ -87,11 +90,17 @@ function draw() {
     image(backgroundImg, 0, 0);
     myRobot.display(); //teken robot
 
-    // Update and display each raindrop
+    //windvlagen updaten en tekenen
     for (let i = 0; i < windstoten.length; i++) {
         let vlagen = windstoten[i];
         vlagen.update();
         vlagen.display();
+    }
+
+    if (!gameOn) {
+        fill(255);
+        textSize(20);
+        text('Probeer de bidons te vangen maar ontwijk de doping!', width / 2 - 200, height / 2 - 100)
     }
 
     if (gameOn) {
@@ -133,7 +142,7 @@ function draw() {
             }
         }
 
-        // Voeg nieuwe bidon of spuit toe elke seconde
+        // Voeg nieuwe bidon of spuit toe elke seconde afh van welk level
         if (frameCount % 60 == 0) {
             if (level == 1) {
                 if (random(1) < 0.5) {
@@ -184,13 +193,14 @@ function draw() {
         }
     }
 }
+//functie om game en gameSound te starten
 function gameStarted() {
     gameOn = true;
     gameSound.play();
     loop();
     startButton.hide();
 }
-
+//functie voor de game te herstarten dmv replay knop
 function restart() {
     score = 0;
     timeLeft = 20;
@@ -201,9 +211,10 @@ function restart() {
     level = 1;
     loop();
     restartButton.hide();
+    nextLevelButton.hide();
     gameOn = true;
 }
-
+//functie voor naar volgend level te gaan
 function nextLevel() {
     level += 1;
     score = 0;

@@ -13,23 +13,23 @@ class spuit {
         translate(this.xPos, this.yPos);
         scale(this.spuitSize);
 
-        // draw spuit body
+        //teken spuit body
         fill(255, 0, 0);
         strokeWeight(2);
         stroke(255);
         rect(150, 200, 100, 30);
 
-        // draw spuit plunger
+        //teken spuit plunger
         fill(255, 0, 0);
         line(250, 215, 280, 215);
         line(280, 200, 280, 230);
 
-        // draw spuit naald
+        //teken spuit naald
         fill(0);
         rect(130, 210, 20, 10);
         line(130, 215, 90, 215);
 
-        // draw maataanduidingen
+        //teken maataanduidingen
         line(160, 200, 160, 210);
         line(170, 200, 170, 205);
         line(180, 200, 180, 210);
@@ -41,7 +41,7 @@ class spuit {
     update() {
         this.yPos += this.speed
     }
-
+    //functie om te kijken of spuit genomen is
     isGenomen(robotX, robotY) {
         if (dist(robotX - 100, robotY - 50, this.xPos, this.yPos) < 50) {
             return true;
@@ -49,9 +49,5 @@ class spuit {
         else {
             return false;
         }
-    }
-
-    isGepakt(robotX, robotY, robotW, robotH) {
-        return this.yPos + 50 >= robotY && this.yPos + 50 <= robotY + robotH && this.xPos >= robotX && this.xPos <= robotX + robotW + 100;
     }
 }
