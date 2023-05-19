@@ -34,10 +34,10 @@ function preload() {
     //geluidsfragmenten inladen
     soundFormats('mp3');
 
-    gameSound = loadSound('data/Rodania1');
-    winningSound = loadSound('data/TomBoonen1');
-    bidonSound = loadSound('data/bidonsound1');
-    spuitSound = loadSound('data/spuitsound1');
+    gameSound = loadSound('data/Rodania1.mp3');
+    winningSound = loadSound('data/TomBoonen1.mp3');
+    bidonSound = loadSound('data/bidonsound1.mp3');
+    spuitSound = loadSound('data/spuitsound1.mp3');
     //achtergrondfoto inladen
     backgroundImg = loadImage('data/cobbles.jpg');
 }
