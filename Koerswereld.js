@@ -33,6 +33,7 @@ function preload() {
     loadJSON('https://api.openweathermap.org/data/2.5/weather?q=Kortrijk,be&appid=276a00d1cf36f1c2b52ae48758fce6ea', gotWeatherData);
     //geluidsfragmenten inladen
     soundFormats('mp3');
+
     gameSound = loadSound('data/Rodania.mp3');
     winningSound = loadSound('data/TomBoonen.mp3');
     bidonSound = loadSound('data/bidonsound.mp3');
