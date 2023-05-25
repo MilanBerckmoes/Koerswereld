@@ -49,7 +49,7 @@ function setup() {
     myRobot = new robot(70, -70, 5); //custom constructor voor de robot
     myRobot.yPos = height - 50;
     score = 0;
-    //startknop toevoegen + uitleg game
+    //startknop toevoegen
     startButton = createButton("Play!");
     startButton.mouseClicked(gameStarted);
     startButton.size(100, 50);
@@ -98,7 +98,7 @@ function draw() {
         vlagen.display();
     }
 
-    if (!gameOn) {
+    if (!gameOn) { //uitleg game toegevoegd voor het spel begint
         fill(255);
         textSize(20);
         text('Probeer de bidons te vangen maar ontwijk de doping!', width / 2 - 200, height / 2 - 100)
