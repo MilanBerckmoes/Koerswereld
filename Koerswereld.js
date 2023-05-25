@@ -46,7 +46,7 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
     backgroundImg.resize(width, height);
     //robot toevoegen
-    myRobot = new robot(70, -70, 5);
+    myRobot = new robot(70, -70, 5); //custom constructor voor de robot
     myRobot.yPos = height - 50;
     score = 0;
     //startknop toevoegen + uitleg game
