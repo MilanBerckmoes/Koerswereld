@@ -19,6 +19,7 @@ let level = 1;
 let nextLevelButton;
 
 //weerdata ophalen en windsnelheid obv windstoten en angle obv degree
+//gotWeatherData is de functie, deze heeft als parameter de variabele 'data'
 function gotWeatherData(data) {
     weatherData = data;
     if (weatherData) {
@@ -74,6 +75,7 @@ function setup() {
     nextLevelButton.hide();
 
     //windstoten genereren zodat ze in dezelfde richting en snelheid vallen als het huidige weer in Kortrijk
+    //Deze code genereert 100 keer willekeurige waarden voor de positie en windsnelheid van een windStoot object. De gegenereerde waarden worden toegevoegd aan de windstoten array.
     for (let i = 0; i < 100; i++) {
         let x = random(width);
         let y = random(height);
@@ -198,14 +200,14 @@ function draw() {
 function gameStarted() {
     gameOn = true;
     gameSound.play();
-    loop();
+    loop(); //loop zorgt ervoor dat de 'draw' functie herhaaldelijk w opgeroepen
     startButton.hide();
 }
 //functie voor de game te herstarten dmv replay knop
 function restart() {
     score = 0;
     timeLeft = 20;
-    bidons = [];
+    bidons = []; //hierdoor w alle eerder opgeslagen bidons & spuiten verwijderd, om zo het spel opnieuw op te starten
     spuiten = [];
     winningSound.stop();
     gameSound.play();
