@@ -1,3 +1,4 @@
+//variabelen en arrays worden geïnitialiseerd
 let myRobot;
 let backgroundImg;
 let bidons = [];
@@ -46,7 +47,7 @@ function preload() {
 function setup() {
     createCanvas(windowWidth, windowHeight);
     backgroundImg.resize(width, height);
-    //robot toevoegen
+    //robot toevoegen en score op 0 gezet
     myRobot = new robot(70, -70, 5); //custom constructor voor de robot
     myRobot.yPos = height - 50;
     score = 0;
@@ -75,7 +76,7 @@ function setup() {
     nextLevelButton.hide();
 
     //windstoten genereren zodat ze in dezelfde richting en snelheid vallen als het huidige weer in Kortrijk
-    //Deze code genereert 100 keer willekeurige waarden voor de positie en windsnelheid van een windStoot object. De gegenereerde waarden worden toegevoegd aan de windstoten array.
+    //Dit genereert 100 keer willekeurige waarden voor de positie en windsnelheid van een windStoot object. De gegenereerde waarden worden toegevoegd aan de windstoten array.
     for (let i = 0; i < 100; i++) {
         let x = random(width);
         let y = random(height);
@@ -184,7 +185,7 @@ function draw() {
 
         //beëindig spel als de tijd op is
         if (timeLeft <= 0) {
-            noLoop();
+            noLoop(); //zorgt ervoor dat de draw functie niet meer automatisch w uitgevoerd, dus er wordt niet meer getekend
             gameSound.stop();
             winningSound.play();
             textSize(30);
